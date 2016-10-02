@@ -19,7 +19,7 @@ class WordCountBolt(Bolt):
     def process(self, tup):
         word = tup.values[0]
         self._increment(word, 10 if word == "dog" else 1)
-        if self.total % 1000 == 0:
-            self.logger.info("counted [{:,}] words [pid={}]".format(self.total,
-                                                                    self.pid))
+        #if self.total % 1000 == 0:
+        #    self.logger.info("counted [{:,}] words [pid={}]".format(self.total,
+        #                                                            self.pid))
         self.emit([word, self.counter[word]])
