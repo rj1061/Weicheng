@@ -1,0 +1,28 @@
+*THis file is a sample tutorial for importing the dataset into mongodb
+
+step 1: Go to https://nycopendata.socrata.com/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/xx67-kt59/data to download dataset as CSV format. There is some problem with json file, so I use csv file. And the location of the data file is ~/Download/DOHMH_New_York_City_Restaurant_Inspection_Results.csv.
+
+step 2: Start mongodb by typing:	
+	sudo service mongod start
+
+step 3: You can verify mongodb has started successfully by Verify that the mongod process has started successfully by checking the contents of the log file at /var/log/mongodb/mongod.log for a line reading:
+
+	[initandlisten] waiting for connections on port <port>
+
+step 4:	Just typping this to import dataset into mongodb:
+
+	mongoimport --db weisheng --collection hygiene --type csv --headerline --file the location of csv file 
+	
+	This command means that, I import the csv file into a mongo db, the name of database is weisheng, the name of the collection (which is just like the table in mysql) is hygiene.
+
+step 5. Then we can check the content of weisheng.hygiene by typping:
+	use weisheng //switch database to weisheng
+
+	then typping:
+	db.hygiene.find() //can use to show the content of hygiene collection
+
+step 6. you can type: 
+	exit //to exit mongo shell, 
+	then type:
+	sudo service mongod stop // to stop mongodb 
+	
