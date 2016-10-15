@@ -14,10 +14,11 @@ class YelpSpout(Spout):
                                                                        'client_secret': 'rE7bOW2mX1Llg1CmX6ZL4PGe21mpOBlXjxSa1m1xx3h8KB1MyZ11yShThqnoK9dP'})
         self.logger.info("Log: " + r.content)
         self.access_json = json.loads(r.text)
-        self.logger.info("Debug: " + self.access_json['access_token'])
-        self.searchJson = requests.get('https://api.yelp.com/v3/businesses/search',
-                                       data = {'location': 'New York',
-                                               'term': 'restaurants'},
-                                       headers = {'authorization': self.access_json['access_token']})
-        self.logger.info("Response Log: " + self.searchJson.text)
+        self.token = self.access_json['access_token']
+        self.searchJson = requests.request('GET',
+                                           'https://api.yelp.com/v3/businesses/search',
+                                           params = {'location': 'New York',
+                                                   'term': 'restaurants'},
+                                           headers = {'Authorization': 'Bearer ' + self.token})
+        self.logger.info("Respose: " + self.searchJson.content)
         self.emit(['something'])
