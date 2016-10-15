@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from streamparse import Bolt
 
 
-class WordCountBolt(Bolt):
+class YelpDataMainBolt(Bolt):
 
     def process(self, tup):
         jsonFiles = tup.values[0];
