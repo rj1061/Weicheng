@@ -14,5 +14,5 @@ class WordCount(Topology):
     yelp_spout = YelpSpout.spec()
     count_bolt = WordCountBolt.spec(inputs={word_spout: Grouping.fields('word')},
                                     par=2)
-    new_count_bolt = WordCountBolt.spec(inputs={yelp_spout: Grouping.fields('something')},
+    new_count_bolt = WordCountBolt.spec(inputs={yelp_spout: Grouping.fields('searchJson')},
                                         par=2)
