@@ -1,10 +1,9 @@
-from collections import Counter
 from pymongo import MongoClient
 from streamparse import Spout
 import json
 
 class readHygiene(Spout):
-    outputs = ['rec']
+    outputs = ['hygiene_record']
 
     def initialize(self, storm_conf, context):
         self.client = MongoClient('mongodb://localhost:27017/')
@@ -26,7 +25,11 @@ class readHygiene(Spout):
         if(self.counter<self.total):
             self.rec = self.db[self.aggregatedCollection].find({}, {"_id": 0})[self.counter]
             self._increment()
-        self.recordJson = json.dumps(self.rec, ensure_ascii=False)
-        self.logger.info("Response: " + self.recordJson)
-        self.emit([self.recordJson])
+        try:
+            self.recordJson = json.dumps(self.rec, ensure_ascii=False)
+        except ValueError:
+            self.logger.error("Value Error while dumping "+self.rec+" into a JSON")
+        else:
+            self.logger.info("Response: " + self.recordJson)
+            self.emit([self.recordJson])
 
