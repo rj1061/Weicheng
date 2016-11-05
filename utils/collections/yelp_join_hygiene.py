@@ -4,7 +4,3 @@ db = client.weisheng
 test = {"test":"test"}
 collection = db.yelp_join_hygiene.insert(test)
 collection = db.yelp_join_hygiene.remove({})
-
-
-
-
