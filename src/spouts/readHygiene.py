@@ -26,10 +26,9 @@ class readHygiene(Spout):
             self.rec = self.db[self.aggregatedCollection].find({}, {"_id": 0})[self.counter]
             self._increment()
         try:
-            self.recordJson = json.dumps(self.rec, ensure_ascii=False)
+            self.recordJson = json.dumps(self.rec)
         except ValueError:
-            self.logger.error("Value Error while dumping "+self.rec+" into a JSON")
+            self.logger.error("Value Error while dumping "+str(self.rec)+" into a JSON")
         else:
-            self.logger.info("Response: " + self.recordJson)
+            #self.logger.info("Response: " + self.recordJson)
             self.emit([self.recordJson])
-

@@ -7,7 +7,7 @@ from streamparse import Bolt
 class YelpDataMainBolt(Bolt):
 
     def process(self, tup):
-        jsonFiles = tup.values[0];
+        jsonFiles = tup.values[0]
         try:
             dictData = json.loads(jsonFiles)
         except ValueError:
