@@ -46,4 +46,4 @@ class YelpJoinBolt(Bolt):
                 else:
                     self.logger.info("Error: Nothing to search for " + self.dataJson)
             except:
-                self.logger.info("Error: No Json decoded " + self.dataJson)
+                self.logger.info("Error: No Json decoded " + str(self.dataJson))

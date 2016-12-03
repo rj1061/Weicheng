@@ -14,7 +14,8 @@
                 "backup_count": 10,
                 "level": "info"
             },
-            "virtualenv_root": ""
+            "virtualenv_root": "",
+	    "supervisor.worker.timeout.secs" : "6000"
         }
     }
 }
