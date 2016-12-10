@@ -1,3 +1,4 @@
+#My R Code
 library(rgdal)
 library(ggplot2)
 library(ggmap)
@@ -25,7 +26,6 @@ proj4string(crime_spatial_df) <-  CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +
 wmap <- readOGR(dsn = "/Users/pratikkamath30/Downloads/Police Precincts/", layer = "geo_export_1a66c59c-5514-4fa5-be7b-81e4cba9dfcb")
 plot(wmap, col="grey", axes = TRUE)
 plot(crime_spatial_df, col = "SteelBlue", pch = 21, cex = .5,add = TRUE, alpha = 0.05)
-
 wmap_DF <- fortify(wmap)
 YelpDataDF$cut <- cut(YelpDataDF$hygiene_average_score, breaks = seq(0,100,11),labels = sprintf("Score %d-%d",seq(0, 80, 10), seq(10,90,10)))
 NYCMap = map = get_map(location = "New York" , zoom = 11, maptype = "terrain")
@@ -44,4 +44,3 @@ gg <- gg + theme(legend.position="right")
 gg <- gg + theme(strip.background=element_rect(fill="white", color="white"))
 gg <- gg + theme(strip.text=element_text(face="bold", hjust=0))
 gg
-
